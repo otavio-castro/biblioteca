@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Spine -->
+  <rect x="14.5" y="3" width="3" height="26" rx="1" fill="#6B3A2A"/>
+
+  <!-- Left cover -->
+  <rect x="2" y="5" width="12.5" height="22" rx="2" fill="#2D5016"/>
+  <!-- Left pages -->
+  <rect x="3.5" y="6.5" width="9.5" height="19" rx="1" fill="#F5ECD7"/>
+  <!-- Left text lines -->
+  <line x1="5" y1="11" x2="12" y2="11" stroke="#B8A88A" stroke-width="1" stroke-linecap="round"/>
+  <line x1="5" y1="14" x2="12" y2="14" stroke="#B8A88A" stroke-width="1" stroke-linecap="round"/>
+  <line x1="5" y1="17" x2="12" y2="17" stroke="#B8A88A" stroke-width="1" stroke-linecap="round"/>
+  <line x1="5" y1="20" x2="10" y2="20" stroke="#B8A88A" stroke-width="1" stroke-linecap="round"/>
+
+  <!-- Right cover -->
+  <rect x="17.5" y="5" width="12.5" height="22" rx="2" fill="#2D5016"/>
+  <!-- Right pages -->
+  <rect x="19" y="6.5" width="9.5" height="19" rx="1" fill="#F5ECD7"/>
+  <!-- Right text lines -->
+  <line x1="20.5" y1="11" x2="27.5" y2="11" stroke="#B8A88A" stroke-width="1" stroke-linecap="round"/>
+  <line x1="20.5" y1="14" x2="27.5" y2="14" stroke="#B8A88A" stroke-width="1" stroke-linecap="round"/>
+  <line x1="20.5" y1="17" x2="27.5" y2="17" stroke="#B8A88A" stroke-width="1" stroke-linecap="round"/>
+  <line x1="20.5" y1="20" x2="25.5" y2="20" stroke="#B8A88A" stroke-width="1" stroke-linecap="round"/>
+</svg>

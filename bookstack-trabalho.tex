@@ -1,0 +1,908 @@
+% ============================================================
+% BookStack — Trabalho Acadêmico
+% Sistemas de Informação — PUC Betim — 2026
+% Disciplina: Programação Orientada a Objetos
+% Normas ABNT (NBR 14724:2011)
+% ============================================================
+
+\documentclass[
+  12pt,
+  a4paper,
+  oneside,
+  brazil
+]{abntex2}
+
+% ── Pacotes ──────────────────────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, backgrounds}
+
+% Coluna X com texto não-justificado (evita hifenização compulsiva)
+\newcolumntype{L}{>{\RaggedRight\arraybackslash}X}
+
+% ── Configuração de cores ─────────────────────────────────────
+\definecolor{codebg}{RGB}{28, 26, 23}
+\definecolor{codegreen}{RGB}{111, 175, 114}
+\definecolor{codepurple}{RGB}{155, 48, 69}
+\definecolor{codeblue}{RGB}{79, 140, 201}
+\definecolor{codeyellow}{RGB}{201, 151, 63}
+\definecolor{codefg}{RGB}{232, 213, 163}
+\definecolor{pucred}{RGB}{139, 0, 0}
+\definecolor{darkgray}{RGB}{60, 60, 60}
+
+% ── Estilo de código ──────────────────────────────────────────
+\lstdefinestyle{csharp}{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\footnotesize\color{codefg},
+  keywordstyle=\color{codeblue}\bfseries,
+  stringstyle=\color{codegreen},
+  commentstyle=\color{darkgray}\itshape,
+  numberstyle=\tiny\color{darkgray},
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=8pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
+  frame=single,
+  rulecolor=\color{darkgray},
+  framesep=4pt,
+  xleftmargin=12pt,
+  xrightmargin=4pt,
+  language=[Sharp]C,
+  morekeywords={abstract,override,required,async,await,Task,var,string,bool,
+                int,public,private,protected,class,interface,new,return,
+                using,namespace,static,readonly,get,set,null,true,false,
+                void,virtual,sealed,enum,record,where,partial,DbSet,
+                HasDiscriminator,HasValue,AddScoped,AddDbContext},
+  morestring=[b]",
+  morestring=[b]',
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+
+\lstdefinestyle{typescript}{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\footnotesize\color{codefg},
+  keywordstyle=\color{codeblue}\bfseries,
+  stringstyle=\color{codegreen},
+  commentstyle=\color{darkgray}\itshape,
+  numberstyle=\tiny\color{darkgray},
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=8pt,
+  showspaces=false,
+  frame=single,
+  rulecolor=\color{darkgray},
+  framesep=4pt,
+  xleftmargin=12pt,
+  language=Java,
+  morekeywords={interface,type,export,import,const,let,async,await,
+                useState,useEffect,from,default,extends,implements,
+                string,number,boolean,void,null,undefined,React,
+                styled,createStore,create,zustand},
+}
+
+\lstdefinestyle{docker}{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\footnotesize\color{codefg},
+  keywordstyle=\color{codeyellow}\bfseries,
+  stringstyle=\color{codegreen},
+  commentstyle=\color{darkgray}\itshape,
+  numberstyle=\tiny\color{darkgray},
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=8pt,
+  frame=single,
+  rulecolor=\color{darkgray},
+  framesep=4pt,
+  xleftmargin=12pt,
+  morekeywords={FROM,WORKDIR,COPY,RUN,ENTRYPOINT,CMD,ENV,ARG,EXPOSE},
+}
+
+% ── hyperref ─────────────────────────────────────────────────
+\hypersetup{
+  colorlinks=true,
+  linkcolor=pucred,
+  citecolor=pucred,
+  urlcolor=codeblue,
+  pdftitle={BookStack - Aplicação dos Pilares da POO em um Sistema de Gerenciamento de Biblioteca},
+  pdfauthor={Gustavo Rodrigues, Otavio Nascimento, Moises Samuel, Sarah Palhares},
+  pdfsubject={Programação Orientada a Objetos},
+}
+
+% ── Metadados ABNT ───────────────────────────────────────────
+\titulo{BookStack: Aplicação dos Pilares da Programação Orientada a Objetos em um Sistema de Gerenciamento de Biblioteca}
+
+\autor{Gustavo Rodrigues \\ Otavio Nascimento \\ Moises Samuel \\ Sarah Palhares}
+
+\local{Betim -- MG}
+\data{2026}
+
+\instituicao{%
+  Pontifícia Universidade Católica de Minas Gerais \par
+  Campus Betim \par
+  Curso de Sistemas de Informação
+}
+
+\tipotrabalho{Trabalho prático da disciplina de Programação Orientada a Objetos}
+
+\preambulo{Trabalho apresentado à disciplina de Programação Orientada a Objetos do curso de Sistemas de Informação da Pontifícia Universidade Católica de Minas Gerais, Campus Betim, como requisito parcial para obtenção de nota.}
+
+\orientador{Professor(a) da Disciplina}
+
+% ── Início do documento ───────────────────────────────────────
+\begin{document}
+
+\frenchspacing
+\selectlanguage{brazil}
+
+% ── Capa ─────────────────────────────────────────────────────
+\imprimircapa
+
+% ── Folha de Rosto ───────────────────────────────────────────
+\imprimirfolhaderosto
+
+% ── Resumo ───────────────────────────────────────────────────
+\begin{resumo}
+Este trabalho apresenta o desenvolvimento do \textbf{BookStack}, um sistema web completo de gerenciamento de acervo e empréstimos para bibliotecas de pequeno a médio porte. O projeto foi concebido com o objetivo central de demonstrar, na prática, os quatro pilares da Programação Orientada a Objetos: \textbf{Abstração}, \textbf{Encapsulamento}, \textbf{Herança} e \textbf{Polimorfismo}. A arquitetura adota separação em três camadas — frontend React, API REST em ASP.NET Core 10 e banco PostgreSQL —, aplicando padrões de projeto como Repository Pattern e Service Layer. A herança entre entidades (\texttt{ItemBiblioteca}, \texttt{Livro}, \texttt{Revista}) é persistida via estratégia \textit{Table-per-Hierarchy} do Entity Framework Core. O controle de acesso é implementado com autenticação JWT e perfis de usuário (Bibliotecário e Aluno). O sistema é implantado em produção com Docker no Render (backend) e Vercel (frontend). Os resultados evidenciam como conceitos teóricos de POO se traduzem em decisões arquiteturais concretas em um projeto full-stack moderno.
+
+\vspace{\onelineskip}
+
+\noindent\textbf{Palavras-chave}: Programação Orientada a Objetos. Herança. Polimorfismo. ASP.NET Core. React. JWT. Entity Framework Core. PostgreSQL.
+\end{resumo}
+
+% ── Abstract ─────────────────────────────────────────────────
+\begin{resumo}[Abstract]
+\begin{otherlanguage*}{english}
+This paper presents the development of \textbf{BookStack}, a complete web-based library management system for small to medium-sized libraries. The project was designed to demonstrate, in practice, the four pillars of Object-Oriented Programming: \textbf{Abstraction}, \textbf{Encapsulation}, \textbf{Inheritance}, and \textbf{Polymorphism}. The architecture adopts a three-layer separation — React frontend, ASP.NET Core 10 REST API, and PostgreSQL database — applying design patterns such as Repository Pattern and Service Layer. Entity inheritance (\texttt{ItemBiblioteca}, \texttt{Livro}, \texttt{Revista}) is persisted via Entity Framework Core's Table-per-Hierarchy strategy. Access control is implemented with JWT authentication and user profiles (Librarian and Student). The system is deployed to production using Docker on Render (backend) and Vercel (frontend). Results show how theoretical OOP concepts translate into concrete architectural decisions in a modern full-stack project.
+
+\vspace{\onelineskip}
+
+\noindent\textbf{Keywords}: Object-Oriented Programming. Inheritance. Polymorphism. ASP.NET Core. React. JWT. Entity Framework Core. PostgreSQL.
+\end{otherlanguage*}
+\end{resumo}
+
+% ── Sumário ──────────────────────────────────────────────────
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ── Lista de tabelas e figuras (opcional ABNT) ────────────────
+\listoftables
+\cleardoublepage
+
+% ── Texto ─────────────────────────────────────────────────────
+\textual
+
+% ============================================================
+\chapter{Introdução}
+% ============================================================
+
+O paradigma da Programação Orientada a Objetos (POO) representa um dos alicerces do desenvolvimento de \textit{software} moderno. Proposto formalmente por Alan Kay na década de 1970 com a linguagem Smalltalk, e popularizado ao longo dos anos 1990 com C++ e Java, o paradigma organiza o código em torno de objetos que encapsulam estado e comportamento, imitando entidades do mundo real \cite{booch1994}.
+
+A abstração, o encapsulamento, a herança e o polimorfismo — os quatro pilares da POO — não são apenas conceitos teóricos: eles guiam decisões arquiteturais em sistemas de produção, reduzem acoplamento, aumentam reusabilidade e tornam o código mais fácil de manter e evoluir.
+
+Este trabalho documenta o desenvolvimento do \textbf{BookStack}, um sistema web completo de gerenciamento de acervo e empréstimos para bibliotecas. O projeto foi construído com duas motivações complementares: (i) resolver um problema real — o controle manual de livros, revistas, usuários e devoluções — e (ii) demonstrar, em código funcional e implantado em produção, como os pilares da POO se manifestam em uma aplicação full-stack contemporânea. O código-fonte completo está disponível publicamente em: \url{https://github.com/otavio-castro/biblioteca}.
+
+\section{Objetivos}
+
+\subsection{Objetivo Geral}
+
+Desenvolver e implantar o sistema BookStack, evidenciando a aplicação prática dos pilares da Programação Orientada a Objetos em uma arquitetura web de três camadas.
+
+\subsection{Objetivos Específicos}
+
+\begin{enumerate}[label=\alph*)]
+  \item Modelar a hierarquia de itens do acervo (\texttt{ItemBiblioteca} → \texttt{Livro} / \texttt{Revista}) utilizando herança e classes abstratas;
+  \item Implementar polimorfismo através do método \texttt{ExibirInformacoes()} sobrescrito em cada subclasse;
+  \item Encapsular regras de negócio em camadas de serviço, protegendo os dados de acesso direto;
+  \item Aplicar abstração por meio de interfaces (\texttt{ILivroService}, \texttt{IEmprestimoRepository} etc.) que definem contratos sem expor implementações;
+  \item Implementar autenticação JWT com controle de acesso por perfil (Bibliotecário e Aluno);
+  \item Realizar o \textit{deploy} completo do sistema em ambiente de produção na nuvem.
+\end{enumerate}
+
+\section{Justificativa}
+
+A escolha de um sistema de biblioteca como domínio de aplicação é intencional: o domínio possui uma hierarquia natural de itens (livros e revistas são tipos de itens de acervo), operações polimórficas bem definidas e regras de negócio que motivam o encapsulamento. Isso permite ilustrar cada pilar da POO com exemplos concretos e compreensíveis.
+
+\section{Estrutura do Trabalho}
+
+O trabalho está organizado em cinco capítulos. O Capítulo~\ref{cap:referencial} apresenta o referencial teórico sobre POO e as tecnologias utilizadas. O Capítulo~\ref{cap:metodologia} descreve a metodologia de desenvolvimento. O Capítulo~\ref{cap:desenvolvimento} detalha a implementação, conectando cada decisão técnica a um pilar da POO. O Capítulo~\ref{cap:resultados} apresenta os resultados e o sistema em produção. O Capítulo~\ref{cap:conclusao} conclui o trabalho.
+
+% ============================================================
+\chapter{Referencial Teórico}
+\label{cap:referencial}
+% ============================================================
+
+\section{Programação Orientada a Objetos}
+
+A Programação Orientada a Objetos é um paradigma de programação que organiza o \textit{software} em torno de objetos — instâncias de classes que encapsulam dados (\textit{atributos}) e comportamentos (\textit{métodos}). Segundo \citeonline{gamma1995}, a POO facilita a criação de sistemas modulares, reutilizáveis e extensíveis.
+
+Os quatro pilares fundamentais são descritos a seguir.
+
+\subsection{Abstração}
+
+Abstração é o processo de identificar as características essenciais de uma entidade, suprimindo os detalhes irrelevantes para o contexto. Em POO, manifesta-se por meio de \textbf{classes abstratas} e \textbf{interfaces}, que definem contratos sem impor implementações específicas \cite{pressman2016}.
+
+No BookStack, a classe \texttt{ItemBiblioteca} é abstrata: ela define o contrato (título, ano de publicação, método \texttt{ExibirInformacoes()}) sem especificar se o item é um livro ou uma revista. As interfaces \texttt{ILivroService}, \texttt{IEmprestimoRepository} etc.\ abstraem os contratos de serviços e repositórios, permitindo que o restante do sistema dependa de abstrações, não de implementações concretas — princípio D do SOLID \cite{martin2000}.
+
+\subsection{Encapsulamento}
+
+Encapsulamento é o mecanismo de restringir o acesso direto ao estado interno de um objeto, expondo apenas o necessário por meio de uma interface pública controlada. Tem por objetivo proteger a integridade dos dados e ocultar a complexidade de implementação \cite{booch1994}.
+
+No BookStack, as camadas de serviço (\texttt{LivroService}, \texttt{EmprestimoService}) encapsulam toda a lógica de negócio — validações, regras de disponibilidade, atualização de contadores —, impedindo que os controladores manipulem diretamente o banco de dados. As senhas dos usuários são encapsuladas via hash BCrypt, nunca expostas como texto simples.
+
+\subsection{Herança}
+
+Herança é o mecanismo pelo qual uma classe (\textit{subclasse} ou classe derivada) adquire os atributos e métodos de outra classe (\textit{superclasse} ou classe base), podendo estendê-los ou sobrescrevê-los. Promove reusabilidade de código e estabelece relações semânticas do tipo \textit{é-um} (\textit{is-a}) \cite{gamma1995}.
+
+No BookStack, \texttt{Livro} e \texttt{Revista} herdam de \texttt{ItemBiblioteca}. Ambos compartilham \texttt{ItemId}, \texttt{Titulo}, \texttt{AnoPublicacao} e \texttt{ImagemUrl} herdados, enquanto cada subclasse acrescenta seus atributos específicos: \texttt{Livro} possui \texttt{Autor}, \texttt{Status} e \texttt{ContadorEmprestimos}; \texttt{Revista} possui \texttt{Editora}, \texttt{Edicao} e \texttt{Periodicidade}.
+
+\subsection{Polimorfismo}
+
+Polimorfismo (do grego: \textit{muitas formas}) é a capacidade de um objeto se comportar de diferentes formas dependendo de seu tipo concreto em tempo de execução. Permite que o código cliente opere sobre referências da superclasse sem precisar conhecer a subclasse específica \cite{pressman2016}.
+
+No BookStack, o método \texttt{ExibirInformacoes()} é declarado \texttt{abstract} em \texttt{ItemBiblioteca} e sobrescrito (\texttt{override}) de forma distinta em \texttt{Livro} e \texttt{Revista}. Uma coleção de \texttt{ItemBiblioteca} pode conter livros e revistas; ao chamar \texttt{item.ExibirInformacoes()}, o comportamento correto é invocado automaticamente para cada tipo.
+
+\section{Padrões de Projeto Aplicados}
+
+\subsection{Repository Pattern}
+
+O padrão Repository abstrai a camada de persistência, fornecendo uma interface orientada a coleções para acesso a objetos de domínio \cite{fowler2002}. O código cliente (serviços) interage com repositórios genéricos, sem conhecer os detalhes do ORM ou do banco de dados.
+
+\subsection{Service Layer}
+
+A camada de serviço encapsula a lógica de aplicação, coordenando entidades do domínio, repositórios e operações transacionais. Isola as regras de negócio dos controladores HTTP \cite{fowler2002}.
+
+\subsection{Data Transfer Object (DTO)}
+
+DTOs são objetos simples sem lógica de negócio, usados para transferir dados entre camadas. Evitam a exposição direta das entidades do domínio nas respostas da API \cite{gamma1995}.
+
+\section{Tecnologias Utilizadas}
+
+\subsection{Backend: ASP.NET Core 10}
+
+ASP.NET Core é um framework web de código aberto, multiplataforma, desenvolvido pela Microsoft. Na versão 10, oferece suporte nativo a \textit{minimal APIs}, Entity Framework Core, autenticação JWT e conteinerização Docker. É fortemente orientado a objetos e ao princípio da inversão de dependência \cite{microsoft2024}.
+
+\subsection{Entity Framework Core e Table-per-Hierarchy}
+
+O EF Core é o ORM oficial para .NET. Suporta diversas estratégias de mapeamento para herança. A estratégia \textbf{Table-per-Hierarchy (TPH)} armazena todas as subclasses em uma única tabela, usando uma coluna discriminadora (\texttt{TipoItem}) para identificar o tipo concreto. É a estratégia padrão do EF Core e oferece melhor desempenho para consultas polimórficas \cite{smith2021}.
+
+\subsection{JWT — JSON Web Token}
+
+JWT é um padrão aberto (RFC 7519) para transmissão segura de informações como objeto JSON assinado. Permite autenticação \textit{stateless}: o servidor não precisa manter sessões, pois todas as informações necessárias estão no próprio token \cite{jones2015}.
+
+\subsection{BCrypt}
+
+BCrypt é um algoritmo de \textit{hash} adaptativo para senhas, projetado para ser computacionalmente custoso e resistente a ataques de força bruta e tabelas \textit{rainbow}. O fator de custo (\textit{work factor}) pode ser aumentado conforme o poder computacional cresce \cite{provos1999}.
+
+\subsection{Frontend: React e Ecossistema}
+
+React é uma biblioteca JavaScript para construção de interfaces declarativas baseadas em componentes. O projeto utiliza TypeScript para tipagem estática, styled-components para CSS-in-JS, Zustand para gerenciamento de estado global e React Router v6 para roteamento \cite{facebook2024}.
+
+\subsection{PostgreSQL e Neon}
+
+PostgreSQL é um SGBD relacional de código aberto, reconhecido por sua conformidade com o padrão SQL, robustez e suporte a tipos avançados. O Neon é uma plataforma de PostgreSQL serverless na nuvem, com \textit{branching} de banco de dados e escalonamento automático \cite{postgresql2024}.
+
+% ============================================================
+\chapter{Metodologia}
+\label{cap:metodologia}
+% ============================================================
+
+\section{Abordagem de Desenvolvimento}
+
+O projeto adotou uma abordagem iterativa e incremental, com entregas funcionais ao final de cada ciclo. As etapas foram organizadas em fases progressivas: modelagem do domínio, implementação do backend, desenvolvimento do frontend, integração, autenticação e \textit{deploy}.
+
+\section{Definição do Domínio}
+
+O domínio foi modelado a partir dos requisitos funcionais de uma biblioteca de pequeno porte:
+
+\begin{itemize}
+  \item Gestão do acervo: cadastro, edição e consulta de livros e revistas;
+  \item Gestão de usuários: cadastro de bibliotecários e alunos;
+  \item Controle de empréstimos: abertura, acompanhamento e devolução;
+  \item Controle de acesso por perfil: bibliotecário tem acesso total; aluno vê apenas seus próprios empréstimos.
+\end{itemize}
+
+\section{Modelagem}
+
+A modelagem utilizou o paradigma Code First do Entity Framework Core: as classes C\# definem o modelo de dados, e as \textit{migrations} geram o esquema do banco automaticamente. Esta abordagem garante que o modelo orientado a objetos seja a fonte de verdade, e não o banco de dados.
+
+\section{Controle de Versão e Deploy}
+
+O código-fonte é versionado no Git. O \textit{deploy} é automatizado: um \textit{push} para a \textit{branch} principal dispara a reconstrução da imagem Docker no Render (backend) e o \textit{build} do Vite no Vercel (frontend).
+
+% ============================================================
+\chapter{Desenvolvimento}
+\label{cap:desenvolvimento}
+% ============================================================
+
+\section{Arquitetura Geral}
+
+O BookStack adota uma arquitetura em três camadas, com separação clara de responsabilidades conforme ilustrado na Tabela~\ref{tab:stack}.
+
+\begin{table}[H]
+\centering
+\caption{Stack tecnológico do BookStack}
+\label{tab:stack}
+\begin{tabularx}{\textwidth}{l L l}
+\toprule
+\textbf{Camada} & \textbf{Tecnologias} & \textbf{Hospedagem} \\
+\midrule
+Frontend & React 19 + TypeScript + Vite + styled-components + Zustand & Vercel \\
+Backend  & ASP.NET Core 10 + EF Core + AutoMapper + JWT + BCrypt & Render (Docker) \\
+Banco    & PostgreSQL 16 via Neon (serverless cloud) & Neon \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelos autores.}
+\end{table}
+
+O fluxo de comunicação segue o modelo cliente-servidor: o frontend React realiza requisições HTTP para a API REST; a API autentica via JWT, executa a lógica de negócio e persiste no PostgreSQL.
+
+\section{Modelo de Domínio e Herança}
+
+\subsection{Hierarquia de Classes}
+
+A hierarquia de itens do acervo é o núcleo do modelo orientado a objetos. A classe \texttt{ItemBiblioteca} é declarada \texttt{abstract}, impedindo instanciação direta e garantindo que todo item do acervo seja, concretamente, um \texttt{Livro} ou uma \texttt{Revista}.
+
+\begin{lstlisting}[style=csharp, caption={Classe abstrata ItemBiblioteca}, label=lst:item]
+[Table("ItensBiblioteca")]
+public abstract class ItemBiblioteca
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int ItemId { get; set; }
+
+    [Required, StringLength(200)]
+    public string Titulo { get; set; } = string.Empty;
+
+    [Required]
+    public int AnoPublicacao { get; set; }
+
+    public string? ImagemUrl { get; set; }
+
+    public ICollection<Emprestimo> Emprestimos { get; set; } = [];
+
+    // Método abstrato — força cada subclasse a definir
+    // sua própria representação textual (Polimorfismo)
+    public abstract string ExibirInformacoes();
+}
+\end{lstlisting}
+
+\subsection{Subclasse Livro}
+
+\begin{lstlisting}[style=csharp, caption={Subclasse Livro com override polimórfico}, label=lst:livro]
+public class Livro : ItemBiblioteca
+{
+    [Required, StringLength(150)]
+    public string Autor { get; set; } = string.Empty;
+
+    [Required]
+    public StatusItem Status { get; set; } = StatusItem.Disponivel;
+
+    public int ContadorEmprestimos { get; set; } = 0;
+
+    public override string ExibirInformacoes()
+        => $"Livro: {Titulo} — Autor: {Autor} ({AnoPublicacao}) " +
+           $"— Status: {Status}";
+}
+
+public enum StatusItem { Disponivel = 0, Emprestado = 1 }
+\end{lstlisting}
+
+\subsection{Subclasse Revista}
+
+\begin{lstlisting}[style=csharp, caption={Subclasse Revista com override polimórfico}, label=lst:revista]
+public class Revista : ItemBiblioteca
+{
+    [Required, StringLength(150)]
+    public string Editora { get; set; } = string.Empty;
+
+    [Required]
+    public int Edicao { get; set; }
+
+    [Required]
+    public Periodicidade Periodicidade { get; set; } = Periodicidade.Mensal;
+
+    public override string ExibirInformacoes()
+        => $"Revista: {Titulo} — Editora: {Editora} — " +
+           $"Ed. {Edicao} ({AnoPublicacao}) — {Periodicidade}";
+}
+
+public enum Periodicidade { Semanal = 0, Mensal = 1, Bimestral = 2, Trimestral = 3 }
+\end{lstlisting}
+
+A Tabela~\ref{tab:heranca} compara os atributos herdados e os específicos de cada subclasse.
+
+\begin{table}[H]
+\centering
+\caption{Atributos herdados vs.\ específicos de cada subclasse}
+\label{tab:heranca}
+\begin{tabularx}{\textwidth}{l L L}
+\toprule
+\textbf{Atributo} & \textbf{Livro} & \textbf{Revista} \\
+\midrule
+\texttt{ItemId} (PK)         & \checkmark\ (herdado) & \checkmark\ (herdado) \\
+\texttt{Titulo}              & \checkmark\ (herdado) & \checkmark\ (herdado) \\
+\texttt{AnoPublicacao}       & \checkmark\ (herdado) & \checkmark\ (herdado) \\
+\texttt{ImagemUrl}           & \checkmark\ (herdado) & \checkmark\ (herdado) \\
+\texttt{Emprestimos}         & \checkmark\ (herdado) & \checkmark\ (herdado) \\
+\texttt{Autor}               & \checkmark\ (específico) & --- \\
+\texttt{Status}              & \checkmark\ (específico) & --- \\
+\texttt{ContadorEmprestimos} & \checkmark\ (específico) & --- \\
+\texttt{Editora}             & --- & \checkmark\ (específico) \\
+\texttt{Edicao}              & --- & \checkmark\ (específico) \\
+\texttt{Periodicidade}       & --- & \checkmark\ (específico) \\
+\texttt{TipoItem} & \multicolumn{2}{>{\RaggedRight\arraybackslash}X}{Coluna discriminadora TPH — gerenciada pelo EF Core} \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelos autores.}
+\end{table}
+
+\subsection{Entidade Usuário}
+
+\begin{lstlisting}[style=csharp, caption={Entidade Usuario com enum de perfil}, label=lst:usuario]
+[Table("Usuarios")]
+public class Usuario
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int UsuarioId { get; set; }
+
+    [Required, StringLength(150)]
+    public string Nome { get; set; } = string.Empty;
+
+    [Required, StringLength(200)]
+    public string Email { get; set; } = string.Empty;
+
+    [StringLength(20)]
+    public string? Telefone { get; set; }
+
+    [Required]
+    public string Senha { get; set; } = string.Empty; // hash BCrypt
+
+    [Required]
+    public PerfilUsuario Perfil { get; set; } = PerfilUsuario.Aluno;
+
+    public ICollection<Emprestimo> Emprestimos { get; set; } = [];
+}
+
+public enum PerfilUsuario { Bibliotecario = 0, Aluno = 1 }
+\end{lstlisting}
+
+\subsection{Entidade Emprestimo}
+
+\begin{lstlisting}[style=csharp, caption={Entidade Emprestimo com relacionamentos}, label=lst:emprestimo]
+[Table("Emprestimos")]
+public class Emprestimo
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int EmprestimoId { get; set; }
+
+    [ForeignKey("Item")]
+    public int ItemId { get; set; }
+    public ItemBiblioteca? Item { get; set; }  // polimorfismo: Livro ou Revista
+
+    [ForeignKey("Usuario")]
+    public int UsuarioId { get; set; }
+    public Usuario? Usuario { get; set; }
+
+    public DateTime DataEmprestimo { get; set; } = DateTime.UtcNow;
+
+    [Required]
+    public DateTime DataDevolucaoPrevista { get; set; }
+
+    public DateTime? DataDevolucaoEfetiva { get; set; }
+
+    [Required]
+    public StatusEmprestimo Status { get; set; } = StatusEmprestimo.Ativo;
+}
+
+public enum StatusEmprestimo { Ativo = 0, Devolvido = 1, Atrasado = 2 }
+\end{lstlisting}
+
+Note que a propriedade \texttt{Item} é do tipo \texttt{ItemBiblioteca} — a superclasse abstrata. Isso exemplifica polimorfismo na camada de dados: um empréstimo pode referenciar qualquer subclasse concreta sem que o código de empréstimo precise conhecer o tipo específico.
+
+\section{Table-per-Hierarchy (TPH) — Herança no Banco de Dados}
+
+O Entity Framework Core persiste a hierarquia \texttt{ItemBiblioteca → Livro/Revista} em uma única tabela (\texttt{ItensBiblioteca}) com uma coluna discriminadora \texttt{TipoItem}. Esta é a estratégia TPH \cite{smith2021}.
+
+\begin{lstlisting}[style=csharp, caption={Configuração TPH no AppDbContext}, label=lst:dbcontext]
+public class AppDbContext : DbContext
+{
+    public DbSet<ItemBiblioteca> ItensBiblioteca { get; set; }
+    public DbSet<Livro> Livros { get; set; }
+    public DbSet<Revista> Revistas { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Emprestimo> Emprestimos { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<ItemBiblioteca>()
+            .HasDiscriminator<string>("TipoItem")
+            .HasValue<Livro>("Livro")
+            .HasValue<Revista>("Revista");
+    }
+}
+\end{lstlisting}
+
+Com esta configuração, ao consultar \texttt{\_context.Livros}, o EF Core automaticamente adiciona o filtro \texttt{WHERE TipoItem = 'Livro'} na \textit{query} SQL, sem que o desenvolvedor precise escrever tal condição.
+
+\section{Padrões de Projeto: Repository e Service Layer}
+
+\subsection{Abstração por Interfaces}
+
+Todos os repositórios e serviços são definidos primeiro como interfaces, depois implementados. Isso exemplifica o \textbf{princípio da inversão de dependência} e o pilar da \textbf{abstração} da POO.
+
+\begin{lstlisting}[style=csharp, caption={Interface de contrato para o repositório de livros}, label=lst:ilivrorepository]
+public interface ILivroRepository
+{
+    Task<IEnumerable<Livro>> GetAllAsync();
+    Task<Livro?> GetByIdAsync(int id);
+    Task AddAsync(Livro livro);
+    Task UpdateAsync(Livro livro);
+    Task DeleteAsync(Livro livro);
+    Task SaveChangesAsync();
+}
+\end{lstlisting}
+
+\subsection{Injeção de Dependência}
+
+O \texttt{DIStartup} centraliza o registro de todas as dependências no contêiner de IoC do ASP.NET Core, seguindo o princípio da \textbf{separação de responsabilidades}:
+
+\begin{lstlisting}[style=csharp, caption={Registro de dependências em DIStartup.cs}, label=lst:di]
+// Repositories
+builder.Services.AddScoped<ILivroRepository, LivroRepository>();
+builder.Services.AddScoped<IRevistaRepository, RevistaRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
+
+// Services
+builder.Services.AddScoped<ILivroService, LivroService>();
+builder.Services.AddScoped<IRevistaService, RevistaService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IEmprestimoService, EmprestimoService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+\end{lstlisting}
+
+A injeção de dependência garante que nenhuma classe instancie diretamente seus colaboradores — recebe-os pelo construtor, dependendo apenas de abstrações.
+
+\section{Autenticação e Autorização: JWT e Perfis de Usuário}
+
+\subsection{Geração do Token JWT}
+
+O \texttt{AuthService} autentica o usuário com BCrypt e gera um JWT com \textit{claims} de identidade, papel (\textit{role}) e ID:
+
+\begin{lstlisting}[style=csharp, caption={Geração de token JWT com claims de perfil}, label=lst:jwt]
+private string GerarToken(Usuario usuario)
+{
+    var chave = new SymmetricSecurityKey(
+        Encoding.UTF8.GetBytes(_config["Jwt:Secret"]!));
+
+    var credenciais = new SigningCredentials(
+        chave, SecurityAlgorithms.HmacSha256);
+
+    var claims = new[]
+    {
+        new Claim(ClaimTypes.Email,          usuario.Email),
+        new Claim(ClaimTypes.Name,           usuario.Nome),
+        new Claim(ClaimTypes.Role,           usuario.Perfil.ToString()),
+        new Claim(ClaimTypes.NameIdentifier, usuario.UsuarioId.ToString()),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+    };
+
+    var token = new JwtSecurityToken(
+        issuer:            _config["Jwt:Issuer"],
+        audience:          _config["Jwt:Audience"],
+        claims:            claims,
+        expires:           DateTime.UtcNow.AddHours(8),
+        signingCredentials: credenciais);
+
+    return new JwtSecurityTokenHandler().WriteToken(token);
+}
+\end{lstlisting}
+
+\subsection{Controle de Acesso por Perfil}
+
+Os controladores utilizam o atributo \texttt{[Authorize(Roles = "Bibliotecario")]} para restringir operações sensíveis. Alunos, ao fazerem login, recebem o token com \textit{role} = ``Aluno'' e são bloqueados nos endpoints protegidos pelo \textit{middleware} de autorização, sem precisar de lógica condicional nos serviços:
+
+\begin{table}[H]
+\centering
+\caption{Controle de acesso por endpoint e perfil}
+\label{tab:acesso}
+\begin{tabularx}{\textwidth}{l l L}
+\toprule
+\textbf{Verbo} & \textbf{Rota} & \textbf{Acesso permitido} \\
+\midrule
+GET    & \texttt{/api/livros}              & Bibliotecário e Aluno \\
+POST   & \texttt{/api/livros}              & Somente Bibliotecário \\
+PUT    & \texttt{/api/livros/\{id\}}       & Somente Bibliotecário \\
+DELETE & \texttt{/api/livros/\{id\}}       & Somente Bibliotecário \\
+GET    & \texttt{/api/revistas}            & Bibliotecário e Aluno \\
+POST   & \texttt{/api/revistas}            & Somente Bibliotecário \\
+GET    & \texttt{/api/emprestimos}         & Bibliotecário vê todos; Aluno vê os seus \\
+POST   & \texttt{/api/emprestimos}         & Bibliotecário e Aluno \\
+PATCH  & \texttt{/api/emprestimos/\{id\}/devolver} & Ambos (Aluno só o próprio) \\
+GET    & \texttt{/api/usuarios}            & Somente Bibliotecário \\
+POST   & \texttt{/api/usuarios}            & Público (cadastro) \\
+POST   & \texttt{/api/auth/login}          & Público \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelos autores.}
+\end{table}
+
+\section{Seed do Acervo}
+
+O \texttt{SeedService} popula o banco com 15 livros e 5 revistas na inicialização, de forma idempotente (verifica títulos existentes antes de inserir). As capas são obtidas da API pública Open Library (\texttt{covers.openlibrary.org}):
+
+\begin{lstlisting}[style=csharp, caption={Fragmento do SeedService — verificação idempotente}, label=lst:seed]
+private async Task SeedAcervoAsync()
+{
+    // Carrega todos os títulos existentes em memória para
+    // checagem O(1) em vez de N queries ao banco
+    var titulosExistentes = await _context.Set<ItemBiblioteca>()
+        .Select(i => i.Titulo).ToHashSetAsync();
+
+    var livros = new List<Livro>
+    {
+        new() {
+            Titulo    = "Harry Potter e a Pedra Filosofal",
+            Autor     = "J.K. Rowling",
+            AnoPublicacao = 1997,
+            ImagemUrl = "https://covers.openlibrary.org/b/isbn/9780439708180-L.jpg"
+        },
+        // ... demais títulos
+    };
+
+    _context.Set<Livro>().AddRange(
+        livros.Where(l => !titulosExistentes.Contains(l.Titulo)));
+}
+\end{lstlisting}
+
+\section{Frontend: Interface React}
+
+\subsection{Arquitetura de Componentes}
+
+O frontend adota a convenção de co-localização: cada página e componente possui \texttt{index.tsx} (lógica e JSX) e \texttt{index.style.ts} (estilos styled-components) na mesma pasta. Isso encapsula a apresentação junto à lógica, reduzindo acoplamento entre módulos.
+
+\subsection{Gerenciamento de Estado com Zustand}
+
+O estado global é gerenciado por \textit{stores} Zustand — uma por domínio. A \texttt{auth.store} armazena o token JWT, nome, email, perfil e ID do usuário logado:
+
+\begin{lstlisting}[style=typescript, caption={Auth store — encapsulamento do estado de autenticação}, label=lst:authstore]
+interface AuthState {
+  token: string | null;
+  nome: string | null;
+  email: string | null;
+  perfil: string | null;
+  usuarioId: number | null;
+  setAuth: (data: LoginResponse) => void;
+  logout: () => void;
+}
+
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      token:     null,
+      nome:      null,
+      email:     null,
+      perfil:    null,
+      usuarioId: null,
+      setAuth:   (data) => set({
+        token: data.token, nome: data.nome,
+        email: data.email, perfil: data.perfil,
+        usuarioId: data.usuarioId
+      }),
+      logout: () => set({
+        token: null, nome: null, email: null,
+        perfil: null, usuarioId: null
+      }),
+    }),
+    { name: 'auth-storage' }
+  )
+);
+\end{lstlisting}
+
+\subsection{Tipagem com TypeScript}
+
+Todas as entidades são tipadas em \texttt{src/types/entities.ts}, garantindo consistência entre o contrato da API e o código do frontend. A propriedade \texttt{perfil} do tipo \texttt{string} reflete a serialização de enum configurada no backend com \texttt{JsonStringEnumConverter}.
+
+\subsection{Temas e Design System}
+
+O sistema visual é implementado com um tema escuro de \textit{vibe de biblioteca antiga}: fundo quase preto (\texttt{\#111110}), texto cor pergaminho (\texttt{\#E8D5A3}), acentos verde candeeiro (\texttt{\#6FAF72}), dourado bronze (\texttt{\#C9973F}) e vinho (\texttt{\#9B3045}).
+
+\section{Deploy em Produção}
+
+\subsection{Backend: Docker e Render}
+
+O backend é conteinerizado com um Dockerfile multi-estágio: a primeira etapa usa o SDK .NET 10 para compilar e publicar o projeto; a segunda etapa usa apenas o \textit{runtime} ASP.NET, resultando em uma imagem mais leve:
+
+\begin{lstlisting}[style=docker, caption={Dockerfile multi-estágio para o backend}, label=lst:docker]
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+COPY ["biblioteca-back/biblioteca-back/biblioteca-back.csproj",
+      "biblioteca-back/biblioteca-back/"]
+RUN dotnet restore \
+    "biblioteca-back/biblioteca-back/biblioteca-back.csproj"
+COPY biblioteca-back/ biblioteca-back/
+RUN dotnet publish \
+    "biblioteca-back/biblioteca-back/biblioteca-back.csproj" \
+    -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "biblioteca-back.dll"]
+\end{lstlisting}
+
+A plataforma Render detecta o \texttt{Dockerfile} no repositório e reconstrói automaticamente a cada \textit{push}. As variáveis de ambiente sensíveis (\texttt{ConnectionStrings\_\_DefaultConnection}, \texttt{Jwt\_\_Secret}) são configuradas no painel do Render, fora do código-fonte.
+
+\subsection{Frontend: Vercel}
+
+O frontend é implantado na Vercel, que detecta o projeto Vite, executa \texttt{npm run build} e serve os arquivos estáticos gerados. A variável de ambiente \texttt{VITE\_API\_URL} aponta para o \textit{endpoint} do Render, configurada no painel da Vercel.
+
+\begin{lstlisting}[style=typescript, caption={Configuração da baseURL da API via variável de ambiente}, label=lst:api]
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api',
+});
+
+api.interceptors.request.use((config) => {
+  const token = useAuthStore.getState().token;
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
+export default api;
+\end{lstlisting}
+
+O interceptor Axios injeta automaticamente o token JWT em todas as requisições autenticadas, encapsulando essa lógica em um único ponto.
+
+\section{Estrutura de Pastas}
+
+A organização do projeto reflete a separação em camadas e o encapsulamento de responsabilidades. A Tabela~\ref{tab:estrutura} resume as principais pastas.
+
+\begin{table}[H]
+\centering
+\caption{Estrutura de pastas do backend}
+\label{tab:estrutura}
+\begin{tabularx}{\textwidth}{>{\ttfamily}l L}
+\toprule
+\textbf{Pasta} & \textbf{Responsabilidade} \\
+\midrule
+Models/       & Entidades do domínio (herança TPH, enums) \\
+DTOs/         & Objetos de transferência de dados (entrada e saída) \\
+Repositories/ & Acesso ao banco de dados (interfaces + implementações) \\
+Services/     & Regras de negócio (interfaces + implementações) \\
+Controllers/  & Endpoints HTTP REST \\
+Context/      & \texttt{AppDbContext} — configuração EF Core \\
+Mappings/     & Perfis AutoMapper (entidade $\leftrightarrow$ DTO) \\
+Filters/      & Filtro global de exceções HTTP \\
+Startup/      & \texttt{DIStartup} (DI), \texttt{SeedService} (dados iniciais) \\
+Migrations/   & Histórico de migrações EF Core \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelos autores.}
+\end{table}
+
+% ============================================================
+\chapter{Resultados}
+\label{cap:resultados}
+% ============================================================
+
+\section{Sistema em Produção}
+
+O BookStack foi implantado com sucesso em ambiente de produção:
+
+\begin{itemize}
+  \item \textbf{Frontend}: \url{https://biblioteca-front.vercel.app} (Vercel)
+  \item \textbf{Backend / Swagger}: \url{https://bookstack-api-wf1b.onrender.com/swagger/index.html} (Render)
+  \item \textbf{Repositório}: \url{https://github.com/otavio-castro/biblioteca} (GitHub)
+  \item \textbf{Apresentação de slides}: \url{https://canva.link/fcjsd0dqyqyiw49} (Canva)
+\end{itemize}
+
+\section{Funcionalidades Implementadas}
+
+\begin{table}[H]
+\centering
+\caption{Funcionalidades implementadas no BookStack}
+\label{tab:funcionalidades}
+\begin{tabularx}{\textwidth}{l L l}
+\toprule
+\textbf{Módulo} & \textbf{Descrição} & \textbf{Perfil} \\
+\midrule
+Autenticação   & Login com e-mail/senha, geração de JWT & Todos \\
+Acervo         & Listagem de livros e revistas com capas & Todos \\
+Cadastro       & Criar, editar e remover livros/revistas & Bibliotecário \\
+Usuários       & Listar e gerenciar usuários & Bibliotecário \\
+Empréstimos    & Abrir empréstimo, filtrar por status (ativo/atrasado/devolvido) & Todos \\
+Devolução      & Registrar devolução e mudar aba automaticamente & Todos \\
+Seed           & 15 livros + 5 revistas com capas Open Library & Sistema \\
+Tema escuro    & Paleta \textit{vibe biblioteca} com verde, bronze e vinho & --- \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelos autores.}
+\end{table}
+
+\section{Pilares da POO — Síntese}
+
+A Tabela~\ref{tab:poo} consolida onde cada pilar da POO se manifesta no código do BookStack.
+
+\begin{table}[H]
+\centering
+\caption{Mapeamento dos pilares da POO no BookStack}
+\label{tab:poo}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3cm} L >{\RaggedRight\arraybackslash}p{4.5cm}}
+\toprule
+\textbf{Pilar} & \textbf{Onde se manifesta no BookStack} & \textbf{Artefatos principais} \\
+\midrule
+Abstração
+  & Classe \texttt{ItemBiblioteca} é \texttt{abstract}: define contrato (título, método \texttt{ExibirInformacoes()}) sem implementar. Interfaces \texttt{IXService} e \texttt{IXRepository} definem contratos de serviços e repositórios sem expor implementações.
+  & \texttt{Models/}, \texttt{Services/Interfaces/}, \texttt{Repositories/Interfaces/} \\
+\addlinespace
+Encapsulamento
+  & Regras de negócio isoladas na camada \texttt{Services}, inacessíveis diretamente pelos controllers. Senhas armazenadas como hash BCrypt. Estado de autenticação encapsulado em store Zustand. Token JWT injetado automaticamente por interceptor Axios.
+  & \texttt{Services/}, \texttt{stores/auth.store.ts}, \texttt{config/api.ts} \\
+\addlinespace
+Herança
+  & \texttt{Livro} e \texttt{Revista} herdam de \texttt{ItemBiblioteca}: reutilizam os cinco campos comuns e acrescentam atributos específicos. Estratégia TPH do EF Core persiste a hierarquia em uma única tabela com coluna discriminadora.
+  & \texttt{Models/Livro.cs}, \texttt{Models/Revista.cs}, \texttt{Context/AppDbContext.cs} \\
+\addlinespace
+Polimorfismo
+  & Método \texttt{ExibirInformacoes()} é \texttt{abstract} na superclasse e sobrescrito (\texttt{override}) de forma distinta em cada subclasse. A propriedade \texttt{Item} em \texttt{Emprestimo} é do tipo \texttt{ItemBiblioteca}: referência polimórfica que aceita \texttt{Livro} ou \texttt{Revista}.
+  & \texttt{Models/Livro.cs}, \texttt{Models/Revista.cs}, \texttt{Models/Emprestimo.cs} \\
+\bottomrule
+\end{tabularx}
+\fonte{Elaborado pelos autores.}
+\end{table}
+
+% ============================================================
+\chapter{Conclusão}
+\label{cap:conclusao}
+% ============================================================
+
+O desenvolvimento do BookStack demonstrou, de forma concreta e verificável em produção, que os quatro pilares da Programação Orientada a Objetos não são abstrações acadêmicas isoladas — são instrumentos de projeto que emergem naturalmente ao modelar domínios reais com rigor.
+
+A \textbf{abstração} se manifestou desde a modelagem: a classe \texttt{ItemBiblioteca} é abstrata porque nunca faria sentido instanciar um ``item genérico'' — apenas livros e revistas existem concretamente. As interfaces de repositórios e serviços abstraíram contratos, permitindo substituir implementações sem alterar os consumidores.
+
+O \textbf{encapsulamento} protegeu a integridade do sistema em múltiplas camadas: as regras de empréstimo ficam na camada de serviço, inacessíveis diretamente pelo controlador; as senhas são sempre armazenadas como hash; o token JWT é injetado automaticamente pelo interceptor Axios, liberando os componentes React dessa responsabilidade.
+
+A \textbf{herança} eliminou duplicação: os cinco campos comuns a livros e revistas são escritos uma única vez em \texttt{ItemBiblioteca}. A estratégia TPH do EF Core estendeu essa herança para o banco de dados, armazenando ambas as subclasses eficientemente em uma única tabela.
+
+O \textbf{polimorfismo} tornou o código extensível: adicionar um novo tipo de item (e.g., DVDs, mapas) exigiria apenas uma nova subclasse de \texttt{ItemBiblioteca} com seu próprio \texttt{ExibirInformacoes()}. O restante do sistema — controladores, serviços, empréstimos — funcionaria sem modificações.
+
+Como trabalhos futuros, sugere-se: (i) implementar notificações automáticas de atraso; (ii) adicionar paginação e busca por texto nas listagens; (iii) criar um módulo de relatórios com gráficos de empréstimos por período; (iv) explorar a estratégia \textit{Table-per-Type} (TPT) como alternativa ao TPH para comparação de desempenho.
+
+% ── Referências ───────────────────────────────────────────────
+\postextual
+
+\bibliography{referencias}
+
+\end{document}

@@ -115,14 +115,10 @@ npm run dev
 
 ---
 
-## Usuários de demonstração
-
-Criados automaticamente no startup do backend:
+## Usuário de demonstração
 
 | E-mail | Senha | Perfil |
 |---|---|---|
-| `admin@biblioteca.com` | `Admin@123` | Bibliotecário |
-| `bibliotecario@biblioteca.com` | `bibliotecario@123` | Bibliotecário |
 | `aluno@biblioteca.com` | `aluno@123` | Aluno |
 
 ---

@@ -31,8 +31,10 @@ const LoginPage = () => {
   return (
     <Styled.Page>
       <Styled.Card>
-        <Styled.Logo>📚</Styled.Logo>
-        <Styled.Titulo>Sistema de Biblioteca</Styled.Titulo>
+        <Styled.Logo>
+          <img src="/favicon.svg" alt="BookStack" width={64} height={64} />
+        </Styled.Logo>
+        <Styled.Titulo>BookStack</Styled.Titulo>
         <Styled.Subtitulo>Acesse sua conta para continuar</Styled.Subtitulo>
         <form onSubmit={handleSubmit}>
           <Styled.Field>
@@ -65,7 +67,7 @@ const LoginPage = () => {
           </Styled.Btn>
         </form>
         <Styled.Hint>
-          Bibliotecário: bibliotecario@biblioteca.com / bibliotecario@123
+          Aluno teste: aluno@biblioteca.com / aluno@123
         </Styled.Hint>
       </Styled.Card>
     </Styled.Page>

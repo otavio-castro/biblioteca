@@ -21,8 +21,10 @@ export const Card = styled.div`
 `;
 
 export const Logo = styled.div`
-  font-size: 3.5rem;
+  display: flex;
+  justify-content: center;
   margin-bottom: 0.5rem;
+  img { width: 72px; height: 72px; }
 `;
 
 export const Titulo = styled.h1`

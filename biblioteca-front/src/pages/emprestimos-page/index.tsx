@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import * as Styled from "./index.style.ts";
 import api from '../../config/api';
 import { useEmprestimosStore } from '../../stores/emprestimos.store';
-import { useAuthStore } from '../../stores/auth.store';
 import BadgeStatus from '../../components/badge-status';
 import type { Emprestimo } from '../../types/entities';
 
@@ -13,7 +12,6 @@ const fmt = (d: string) => new Date(d).toLocaleDateString('pt-BR');
 
 const EmprestimosPage = () => {
   const { emprestimos, setEmprestimos, devolverEmprestimo } = useEmprestimosStore();
-  const isBibliotecario = useAuthStore((s) => s.isBibliotecario)();
   const navigate = useNavigate();
   const [aba, setAba] = useState<Aba>('ativos');
   const [loading, setLoading] = useState(true);

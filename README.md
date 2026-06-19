@@ -2,6 +2,8 @@
 
 Sistema web completo para gerenciamento de acervo e empréstimos de bibliotecas, com controle de acesso por perfil, tema claro/escuro e responsividade mobile.
 
+Disponível: https://bookstack-poo.vercel.app
+
 ---
 
 ## Telas
@@ -10,7 +12,7 @@ Sistema web completo para gerenciamento de acervo e empréstimos de bibliotecas,
 ![Home](biblioteca-front/docs/screenshots/home.png)
 
 ### Acervo — Modo Claro
-![Acervo](biblioteca-front/docs/screenshots/acervo.png)
+<img width="1896" height="945" alt="image" src="https://github.com/user-attachments/assets/262c6e94-e0fb-4e65-ab84-124d79ea35b1" />
 
 ### Acervo — Modo Escuro
 ![Dark Mode](biblioteca-front/docs/screenshots/dark-acervo.png)

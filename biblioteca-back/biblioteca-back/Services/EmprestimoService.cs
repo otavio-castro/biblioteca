@@ -85,7 +85,8 @@ namespace biblioteca_back.Services
                 ItemId = livro.ItemId,
                 Titulo = livro.Titulo,
                 Autor = livro.Autor,
-                ContadorEmprestimos = livro.ContadorEmprestimos
+                ContadorEmprestimos = livro.ContadorEmprestimos,
+                ImagemUrl = livro.ImagemUrl
             };
         }
 

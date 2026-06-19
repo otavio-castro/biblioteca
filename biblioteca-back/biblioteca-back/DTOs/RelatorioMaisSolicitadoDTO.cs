@@ -6,5 +6,6 @@ namespace biblioteca_back.DTOs
         public string Titulo { get; set; } = string.Empty;
         public string Autor { get; set; } = string.Empty;
         public int ContadorEmprestimos { get; set; }
+        public string? ImagemUrl { get; set; }
     }
 }

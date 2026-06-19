@@ -5,6 +5,8 @@ import api from '../../config/api';
 import type { Livro, Revista, Emprestimo } from '../../types/entities';
 import { useAuthStore } from '../../stores/auth.store';
 
+const PLACEHOLDER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='120' viewBox='0 0 80 120'%3E%3Crect width='80' height='120' fill='%231C1A17'/%3E%3Crect x='5' y='5' width='70' height='110' rx='3' fill='%23242018' stroke='%2338342C' stroke-width='1'/%3E%3Ctext x='40' y='65' font-size='28' text-anchor='middle' dominant-baseline='middle'%3E📚%3C/text%3E%3C/svg%3E";
+
 interface MaisSolicitado {
   itemId: number;
   titulo: string;
@@ -81,9 +83,9 @@ const HomePage = () => {
           <Styled.SectionTitle>⭐ Mais Solicitado</Styled.SectionTitle>
           <Styled.DestCard>
             <Styled.DestCover
-              src={maisSolicitado.imagemUrl || 'https://via.placeholder.com/80x120/D4A96A/2C1A0E?text=📚'}
+              src={maisSolicitado.imagemUrl || PLACEHOLDER}
               alt={maisSolicitado.titulo}
-              onError={(e) => { (e.target as HTMLImageElement).src = 'https://via.placeholder.com/80x120/D4A96A/2C1A0E?text=📚'; }}
+              onError={(e) => { const img = e.target as HTMLImageElement; img.onerror = null; img.src = PLACEHOLDER; }}
             />
             <Styled.DestInfo>
               <Styled.DestTitulo>{maisSolicitado.titulo}</Styled.DestTitulo>

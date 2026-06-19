@@ -64,6 +64,21 @@ export const Actions = styled.div`
   margin-top: 1.25rem;
 `;
 
+export const Select = styled.select`
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid ${({ theme }) => theme.border};
+  border-radius: 8px;
+  background: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
+  font-size: 0.9rem;
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.primary};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.primary}22;
+  }
+`;
+
 export const BtnCancel = styled.button`
   padding: 0.55rem 1.1rem;
   border: 1px solid ${({ theme }) => theme.border};
